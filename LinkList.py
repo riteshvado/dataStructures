@@ -68,13 +68,19 @@ class LinkedList:
     def delete_node(self, val=None):
          
         temp_node=self.head
-         
+        prev=None 
         while temp_node is not None:
-            print(temp_node.data)
-            temp_node=temp_node.next
+            #print(temp_node.data)
+           
+            if temp_node.data == val:
+                print("--Found prev and current node",prev,temp_node,prev.data)
+                prev.next=temp_node.next
+                return 
+            else:
+                prev=temp_node
+                temp_node=temp_node.next
             
-             
-         
+            
         
 a=LinkedList()  
 a.append(node=Node("Mon"))
@@ -87,5 +93,8 @@ a.prepend(node=Node("Sun"))
 a.insert_after_node(prev_node=a.head.next.next,node=Node("Foo"))
 
 #a.printList()
+a.printList()
 
 a.delete_node(val="Foo")
+
+a.printList()
