@@ -35,6 +35,9 @@ class LinkedList:
             return 0
     
     def append(self,node=None):
+        """
+        Adding node at the end
+        """
         
         if self.head is None:
             self.head=node
@@ -50,7 +53,9 @@ class LinkedList:
     
     
     def prepend(self,node=None):
-        
+        """
+        Adding node at the beginning 
+        """
         if self.head is None:
             self.head=node
             return
@@ -61,6 +66,11 @@ class LinkedList:
     
             
     def insert_after_node(self, prev_node, node):
+        """
+        Inserting after particular node.
+        prev_node is existing node  you want to locate and insert a new node after it.
+        node : New node we want to insert
+        """
         if prev_node is None: 
             print("Error : Prev node is None")
             return 
@@ -82,7 +92,9 @@ class LinkedList:
         node.next=prev_next
 
     def delete_node(self, val=None):
-         
+        """
+        Delete a node.
+        """
         temp_node=self.head
         prev=None 
         while temp_node is not None:
@@ -98,6 +110,9 @@ class LinkedList:
             
     
     def swap_nodes(self,val1=None,val2=None):
+        """
+        Swapping 2 nodes based on values
+        """
         
         if val1== val2:
             return 
@@ -149,6 +164,10 @@ class LinkedList:
         curr1.next,curr2.next=curr2.next,curr1.next 
         
     def get_nth_from_last(self, n):
+       """
+       This is for finding nth node from tail.
+       
+       """
        len_total=self.countItemstRecurse()
        remain=len_total-n+1
        curr=self.head 
@@ -163,6 +182,9 @@ class LinkedList:
                
     
     def count_values(self,val,first=1,node=None):
+        """
+        Recurive way of verifying how many matching data values are there in linked list. 
+        """
         if first == 1:
             node=self.head
         
@@ -175,6 +197,35 @@ class LinkedList:
         else:
             return 0
             
+    def rotate(self,val=None):
+        """
+        The node we find becomes tail. THe next one becomes head and rest portion gets added to original head.
+        If you are rotating last node there is nothing to rotate.
+        If you have multiple value match it will rotate on last found.
+        """
+        curr=self.head
+        prev=None
+        newTail=None
+        newHead=None
+        match=False
+        while curr:
+            if curr.data == val and curr.next is not None:
+                match=True
+                newTail=curr
+                newHead=curr.next
+                
+            prev=curr
+            curr=curr.next
+        
+        if match:
+            print(prev.data,newTail.data,newHead.data,"FFFFFFFFFF")   
+            prev.next=self.head
+            newTail.next=None
+            self.head=newHead
+            
+            
+            
+        
    
 
 a=LinkedList()  
@@ -182,8 +233,9 @@ a.append(node=Node("Mon"))
 a.append(node=Node("Tue"))
 a.append(node=Node("Wed"))
 a.append(node=Node("Thu"))
-a.append(node=Node("Thu"))
+
 a.prepend(node=Node("Sun"))
+
 
 a.insert_after_node(prev_node=a.head.next.next,node=Node("Foo"))
 
@@ -202,6 +254,10 @@ a.printListRecurse(node=a.head)
 #a.printListRecurse(node=a.head)
 
 #a.get_nth_from_last(n=3)
-print(a.get_nth_from_last(n=6))
+#print(a.get_nth_from_last(n=6))
 
-print(a.count_values(val='Thu'))
+#print(a.count_values(val='Sun'))
+print(a.rotate(val='Thu'))
+print("*"*20)
+
+a.printListRecurse(node=a.head)
