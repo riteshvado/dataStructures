@@ -161,18 +161,28 @@ class LinkedList:
            else:
                curr=curr.next 
                
-       
-        # total_len = self.countItemstRecurse()
-        # elements_to_move=total_len-n 
-        # print(elements_to_move)
+    
+    def count_values(self,val,first=1,node=None):
+        if first == 1:
+            node=self.head
         
+        if node:
+            if node.data == val:
+                return 1 + self.count_values(val=val,first=0,node=node.next)
+            
+            else:
+                return 0+self.count_values(val=val,first=0,node=node.next)
+        else:
+            return 0
+            
+   
 
 a=LinkedList()  
 a.append(node=Node("Mon"))
 a.append(node=Node("Tue"))
 a.append(node=Node("Wed"))
 a.append(node=Node("Thu"))
-
+a.append(node=Node("Thu"))
 a.prepend(node=Node("Sun"))
 
 a.insert_after_node(prev_node=a.head.next.next,node=Node("Foo"))
@@ -193,3 +203,5 @@ a.printListRecurse(node=a.head)
 
 #a.get_nth_from_last(n=3)
 print(a.get_nth_from_last(n=6))
+
+print(a.count_values(val='Thu'))
