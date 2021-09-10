@@ -17,6 +17,22 @@ class LinkedList:
         #Last node
         if temp.next is None:
             print(temp.data)
+            
+    def printListRecurse(self,node=None):
+        if node is not None:
+            print(node.data)
+            self.printListRecurse(node=node.next)
+            
+    
+    def countItemstRecurse(self,node=None,first=1):
+        if first == 1:
+            node=self.head
+            
+        if node is not None:
+            print (node.next,1)
+            return 1 + self.countItemstRecurse(node=node.next,first=0)
+        else:
+            return 0
     
     def append(self,node=None):
         
@@ -80,8 +96,77 @@ class LinkedList:
                 prev=temp_node
                 temp_node=temp_node.next
             
-            
+    
+    def swap_nodes(self,val1=None,val2=None):
         
+        if val1== val2:
+            return 
+        
+        prev1=None
+        curr1=self.head
+        
+        ##Identifying prev and current node for val1 
+        while curr1 and curr1.data != val1:
+            print("|"* 10)
+            print(curr1.data)
+            prev1=curr1
+            curr1=curr1.next 
+        
+        
+        
+                
+            
+        ##Identifying prev and current node for val2 
+        prev2=None
+        curr2=self.head
+        
+        while curr2 and curr2.data != val2:
+            print("*"*10)
+           # print(curr2.data)
+            prev2=curr2
+            curr2=curr2.next     
+        
+        
+        
+        
+        if prev1:
+            print(prev1.data,curr1.data)
+            prev1.next=curr2.next
+        else:
+            print(prev1,curr1.data)
+            self.head=curr2
+            
+            
+        if prev2:
+            print(prev2.data,curr2.data)
+            prev2.next=curr1
+        else:
+            print(prev2,curr2.data)
+            self.head=curr1
+        
+        
+        
+        curr1.next,curr2.next=curr2.next,curr1.next 
+        
+    def get_nth_from_last(self, n):
+       len_total=self.countItemstRecurse()
+       remain=len_total-n+1
+       curr=self.head 
+       count=0
+       print(remain)
+       while curr:
+           count=count+1
+           if count == remain:
+               return curr
+           else:
+               curr=curr.next 
+               
+       
+        # total_len = self.countItemstRecurse()
+        # elements_to_move=total_len-n 
+        # print(elements_to_move)
+        
+
 a=LinkedList()  
 a.append(node=Node("Mon"))
 a.append(node=Node("Tue"))
@@ -98,3 +183,13 @@ a.printList()
 a.delete_node(val="Foo")
 
 a.printList()
+
+print("Printing using recursive call ")
+a.printListRecurse(node=a.head)
+#print(a.countItemstRecurse())
+#a.swap_nodes(val1="Sun",val2="Thu")
+#print("After Swappppppp")
+#a.printListRecurse(node=a.head)
+
+#a.get_nth_from_last(n=3)
+print(a.get_nth_from_last(n=6))
