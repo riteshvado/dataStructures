@@ -36,8 +36,30 @@ class CircularLinkList:
             
 
 
-  def prepend():
-    pass
+  def prepend(self,data):
+      """
+      
+      """
+      if self.head is None:
+          self.append(data)
+      else:
+          
+          curr=self.head
+          new_node=Node(data)
+          #adding head to new node next 
+          new_node.next=self.head
+          ##Iterating till tail 
+          while curr.next != self.head:
+              curr=curr.next
+          
+          #Making new node as head.
+          self.head=new_node
+          #assign next of tail to new head.
+          curr.next=new_node
+          
+          
+            
+    
   
   def print_list(self):
       
@@ -57,4 +79,8 @@ if __name__=="__main__":
     cir.append(1)
     cir.append(2)
     cir.append(3)
+    cir.print_list()
+    print("prepending now")
+    cir.prepend(0)
+    cir.prepend(-1)
     cir.print_list()
