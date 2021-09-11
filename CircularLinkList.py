@@ -72,7 +72,25 @@ class CircularLinkList:
           while curr.next != self.head:
               curr=curr.next
               print(curr.data)
-    
+  
+  def print_list_recursive(self,node=None):
+      """
+      printing list in recursion
+      """
+      if self.head is None:
+          return
+      
+      if node is None:
+          node=self.head 
+          
+      if node.next == self.head:
+          print (node.data)
+          return 
+      else:
+          print(node.data)
+          self.print_list_recursive(node=node.next)
+          
+          
 if __name__=="__main__":
     print ("__main__"*10)
     cir=CircularLinkList()
@@ -83,4 +101,4 @@ if __name__=="__main__":
     print("prepending now")
     cir.prepend(0)
     cir.prepend(-1)
-    cir.print_list()
+    cir.print_list_recursive()
