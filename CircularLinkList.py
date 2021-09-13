@@ -89,8 +89,38 @@ class CircularLinkList:
       else:
           print(node.data)
           self.print_list_recursive(node=node.next)
+
+
+  def remove_node(self,data=None):
+      """
+      Remove nodes needs to take care of 2 cases : 
+      1> Head node case : 
+      2> Others (No special needed for Tail): 
+      """
+      
+      curr=self.head
+      prev=None
+      while curr.data != data:
+              prev=curr
+              curr=curr.next 
+      
+      if prev is None:
+          next_element=self.head.next 
           
           
+          #get to tail 
+          while curr.next != self.head:
+              curr=curr.next 
+          
+          self.head=None
+          ##We get tail now. Assign to new head. 
+          self.head=next_element
+          curr.next=self.head
+      else:
+          prev.next=curr.next
+          curr=None
+
+
 if __name__=="__main__":
     print ("__main__"*10)
     cir=CircularLinkList()
@@ -102,3 +132,9 @@ if __name__=="__main__":
     cir.prepend(0)
     cir.prepend(-1)
     cir.print_list_recursive()
+    
+    print("Remove head node::")
+    cir.remove_node(2)
+    print("After Remove node")
+    cir.print_list_recursive()
+    
