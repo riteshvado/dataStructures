@@ -1,2 +1,2 @@
 # dataStructures
-Data Structures in Python
+Data Structures
